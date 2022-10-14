@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pago extends Model
 {
-    use HasFactory;
+    
+    public function facturas(){
+        return $this-hasMany('App\Models\Factura');
+    }
 }

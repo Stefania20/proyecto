@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Factura extends Model
 {
-    use HasFactory;
+    public function pago (){
+        return $this-belongsT('App\Models\Pago');
+    }
+    public function detalle (){
+        return $this-belongsT('App\Models\Detalle');
+    }
 }

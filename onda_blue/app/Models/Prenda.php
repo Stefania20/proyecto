@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prenda extends Model
 {
-    use HasFactory;
+    public function detalle (){
+        return $this-belongsT('App\Models\Detalle');
+    }
 }
