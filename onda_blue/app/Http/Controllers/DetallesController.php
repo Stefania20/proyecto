@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detalle;
 use Illuminate\Http\Request;
 
-class DetalleController extends Controller
+class DetallesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class DetalleController extends Controller
      */
     public function index()
     {
-        //
+        return view("detalles.detalles_index", ["detalles"=>Detalle::all()]);
     }
 
     /**
@@ -23,7 +24,7 @@ class DetalleController extends Controller
      */
     public function create()
     {
-        //
+        return view("detalles.detalles_create");
     }
 
     /**
@@ -34,16 +35,19 @@ class DetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $detalle = new Detalle($request->input());
+        $detalle->saveOrFail();
+        return redirect()->route("detalles.index")->with(["mensaje" => "Detalle creado",
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Detalle  $detalle
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Detalle $detalle)
     {
         //
     }
@@ -51,34 +55,38 @@ class DetalleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Detalle  $detalle
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Detalle $detalle)
     {
-        //
+        return view("detalles.detalles_edit", ["detalle" => $detalle,
+    ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Detalle  $detalle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Detalle $detalle)
     {
-        //
+        $detalle->fill($request->input())->saveOrFail();
+        return redirect()->route("detalles.index")->with(["mensaje" => "Detalle actualizado"]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Detalle  $detalle
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Detalle $detalle)
     {
-        //
+        $detalle->delete();
+        return redirect()->route("detalles.index")->with(["mensaje" => "Detalle eliminado",
+        ]);
     }
 }
