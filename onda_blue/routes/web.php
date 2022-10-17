@@ -27,8 +27,8 @@ Route::get('/index', function () {
     return view('index');
 });
 
-Route::get('/detalles', function () {
-    return view('detalles');
+Route::get('/detalles_index', function () {
+    return view('detalles_index');
 });
 
 Route::get('/facturas', function () {

@@ -14,7 +14,7 @@ class FacturasController extends Controller
      */
     public function index()
     {
-        //
+        return view("factura.facturas_index", ["facturas"=>Factura::all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class FacturasController extends Controller
      */
     public function create()
     {
-        //
+        return view("factura.facturas_create");
     }
 
     /**
@@ -35,7 +35,10 @@ class FacturasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $factura = new Factura($request->input());
+        $factura->saveOrFail();
+        return redirect()->route("facturas.index")->with(["mensaje" => "Factura creada",
+        ]);
     }
 
     /**
@@ -57,7 +60,7 @@ class FacturasController extends Controller
      */
     public function edit(Factura $factura)
     {
-        //
+        return view("factura.facturas_edit", ["factura" => $factura,]);
     }
 
     /**
@@ -69,7 +72,8 @@ class FacturasController extends Controller
      */
     public function update(Request $request, Factura $factura)
     {
-        //
+        $factura->fill($request->input())->saveOrFail();
+        return redirect()->route("facturas.index")->with(["mensaje" => "Factura actualizada"]);
     }
 
     /**
@@ -80,6 +84,8 @@ class FacturasController extends Controller
      */
     public function destroy(Factura $factura)
     {
-        //
+        $factura->delete();
+        return redirect()->route("facturas.index")->with(["mensaje" => "Factura eliminada",
+        ]);
     }
 }

@@ -14,7 +14,7 @@ class DetallesController extends Controller
      */
     public function index()
     {
-        return view("detalles.detalles_index", ["detalles"=>Detalle::all()]);
+        return view("detalle.detalles_index", ["detalles"=>Detalle::all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class DetallesController extends Controller
      */
     public function create()
     {
-        return view("detalles.detalles_create");
+        return view("detalle.detalles_create");
     }
 
     /**
@@ -60,8 +60,7 @@ class DetallesController extends Controller
      */
     public function edit(Detalle $detalle)
     {
-        return view("detalles.detalles_edit", ["detalle" => $detalle,
-    ]);
+        return view("detalle.detalles_edit", ["detalle" => $detalle,]);
     }
 
     /**

@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        return view("user.users_index", ["users"=>User::all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view("user.users_create");
     }
 
     /**
@@ -35,7 +35,10 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User($request->input());
+        $user->saveOrFail();
+        return redirect()->route("users.index")->with(["mensaje" => "Usuario creado",
+        ]);
     }
 
     /**
@@ -57,7 +60,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view("user.users_edit", ["user" => $user,]);
     }
 
     /**
@@ -69,7 +72,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->fill($request->input())->saveOrFail();
+        return redirect()->route("users.index")->with(["mensaje" => "Usuario actualizado"]);
     }
 
     /**
@@ -80,6 +84,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route("users.index")->with(["mensaje" => "Usuario eliminado",
+        ]);
     }
 }

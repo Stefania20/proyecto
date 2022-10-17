@@ -14,7 +14,7 @@ class PagosController extends Controller
      */
     public function index()
     {
-        //
+        return view("pago.pagos_index", ["pagos"=>Pago::all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class PagosController extends Controller
      */
     public function create()
     {
-        //
+        return view("pago.pagos_create");
     }
 
     /**
@@ -35,7 +35,10 @@ class PagosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pago = new Pago($request->input());
+        $pago->saveOrFail();
+        return redirect()->route("pagos.index")->with(["mensaje" => "Pago creado",
+        ]);
     }
 
     /**
@@ -57,7 +60,7 @@ class PagosController extends Controller
      */
     public function edit(Pago $pago)
     {
-        //
+        return view("pago.pagos_edit", ["pago" => $pago,]);
     }
 
     /**
@@ -69,7 +72,8 @@ class PagosController extends Controller
      */
     public function update(Request $request, Pago $pago)
     {
-        //
+        $pago->fill($request->input())->saveOrFail();
+        return redirect()->route("pagos.index")->with(["mensaje" => "Pago actualizado"]);
     }
 
     /**
@@ -80,6 +84,8 @@ class PagosController extends Controller
      */
     public function destroy(Pago $pago)
     {
-        //
+        $pago->delete();
+        return redirect()->route("pagos.index")->with(["mensaje" => "Pago eliminado",
+        ]);
     }
 }

@@ -14,7 +14,7 @@ class PrendasController extends Controller
      */
     public function index()
     {
-        //
+        return view("prenda.prendas_index", ["prendas"=>Prenda::all()]);
     }
 
     /**
@@ -24,7 +24,7 @@ class PrendasController extends Controller
      */
     public function create()
     {
-        //
+        return view("prenda.prendas_create");
     }
 
     /**
@@ -35,7 +35,10 @@ class PrendasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $prenda = new Prenda($request->input());
+        $prenda->saveOrFail();
+        return redirect()->route("prendas.index")->with(["mensaje" => "Prenda creada",
+        ]);
     }
 
     /**
@@ -57,7 +60,7 @@ class PrendasController extends Controller
      */
     public function edit(Prenda $prenda)
     {
-        //
+        return view("prenda.prendas_edit", ["prenda" => $prenda,]);
     }
 
     /**
@@ -69,7 +72,8 @@ class PrendasController extends Controller
      */
     public function update(Request $request, Prenda $prenda)
     {
-        //
+        $prenda->fill($request->input())->saveOrFail();
+        return redirect()->route("prendas.index")->with(["mensaje" => "Prenda actualizada"]);
     }
 
     /**
@@ -80,6 +84,8 @@ class PrendasController extends Controller
      */
     public function destroy(Prenda $prenda)
     {
-        //
+        $prenda->delete();
+        return redirect()->route("prendas.index")->with(["mensaje" => "Prenda eliminada",
+        ]);
     }
 }
