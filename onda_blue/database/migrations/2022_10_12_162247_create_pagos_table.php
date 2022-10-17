@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->integer('efectivo');
+            $table->integer('efectivo'); 
             $table->boolean('estado');
         });
     }

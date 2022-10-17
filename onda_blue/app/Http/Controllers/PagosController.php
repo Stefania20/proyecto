@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pago;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePagoRequest;
 
 class PagosController extends Controller
 {

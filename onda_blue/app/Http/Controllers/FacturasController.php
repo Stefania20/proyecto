@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreFacturaRequest;
+
 
 class FacturasController extends Controller
 {
