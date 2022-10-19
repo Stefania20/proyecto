@@ -9,6 +9,8 @@ use App\Http\Requests\StoreDetalleRequest;
 
 class DetallesController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
