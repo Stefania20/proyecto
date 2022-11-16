@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 
-class UsersController extends Controller
+class RegisterController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view("user.users_create");
+        return view("auth.register");
     }
 
     /**
@@ -38,7 +38,7 @@ class UsersController extends Controller
     {
         $user = new User($request->input());
         $user->saveOrFail();
-        return redirect()->route("users.index")->with(["mensaje" => "Usuario creado",
+        return redirect()->route("user.users_index")->with(["mensaje" => "user creada",
         ]);
     }
 
