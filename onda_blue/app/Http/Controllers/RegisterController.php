@@ -36,7 +36,8 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User($request->input());
+        //var_dump($request->all());
+        $user = new User($request->except("_token"));
         $user->saveOrFail();
         return redirect()->route("user.users_index")->with(["mensaje" => "user creada",
         ]);

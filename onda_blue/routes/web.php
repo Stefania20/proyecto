@@ -5,7 +5,7 @@ use App\Http\Controllers\DetallesController;
 use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\PagosController;
 use App\Http\Controllers\PrendasController;
-use App\Http\Controllers\UsersController;
+
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 
@@ -54,14 +54,13 @@ Route::get('/homes', function () {
 });
 
 Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
-Route::post('/register', [SessionsController::class, 'store'])->name('register.store');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::get('/register', [RegisterController::class, 'create'])->name('register.index');
+
 
 Route::resource("detalles", "DetallesController")->parameters(["detalles"=>"detalle"]);
 Route::resource("facturas", "FacturasController")->parameters(["facturas"=>"factura"]);
 Route::resource("pagos", "PagosController")->parameters(["pagos"=>"pago"]);
 Route::resource("prendas", "PrendasController")->parameters(["prendas"=>"prenda"]);
-Route::resource("users", "UsersController")->parameters(["users"=>"user"]);
 Route::resource("homes", "RegisterController")->parameters(["homes"=>"home"]);
-
 
