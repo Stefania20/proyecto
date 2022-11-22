@@ -13,7 +13,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,9 +24,8 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "nombre" => 'required',
-            "apellido" => 'required',
-            "correo" => 'required',
+            "name" => 'required',
+            "email" => 'required|email|unique:users',
             "password" => 'required'
         ];
     }
@@ -34,9 +33,9 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombre.required' => 'Campo Obligatorio',
-            'apellido.required' => 'Campo Obligatorio',
-            'correo.required' => 'Campo Obligatorio',
+            'name.required' => 'Campo Obligatorio',
+            'email.required' => 'Campo Obligatorio',
+            'email.unique' => 'Este correo ya existe',
             'password.required' => 'Campo Obligatorio',
             
         ];

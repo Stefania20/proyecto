@@ -23,7 +23,7 @@ use App\Http\Controllers\SessionsController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::get('/index', function () {
     return view('index');
@@ -53,10 +53,14 @@ Route::get('/homes', function () {
     return view('homes');
 });
 
-Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::get('/register', [RegisterController::class, 'create'])->name('register.index');
+Route::get('/register', [RegisterController::class, 'create'])
+->middleware('guest')
+->name('register.index');
 
+Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
+Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
+Route::get('/logout', [SessionsController::class, 'destroy'])->name('login.destroy');
 
 Route::resource("detalles", "DetallesController")->parameters(["detalles"=>"detalle"]);
 Route::resource("facturas", "FacturasController")->parameters(["facturas"=>"factura"]);

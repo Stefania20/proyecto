@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> @yield('title') </title>
      <!-- Compiled and minified CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Favicon  -->
+     
     
 </head>
 <body>
@@ -16,10 +17,21 @@
         <p>OndaBlue</p>
     </div>
     <ul>
+        @if(auth()->check())
         <li>
-        <a href="{{ route('login.index') }}" class="blue-text text-darken-2">Login</a>
-        <a href="{{ route('register.index' )}}"  class="blue-text text-darken-2">Registro</a>
-    </li>
+           <p class="blue-text text-darken-2">Bienvenid@ <b>{{  auth()->user()->name  }}</b></p>
+        </li>
+        <li>
+            <a href="{{ route('login.destroy') }}"  class="red-text text-darken-2">Salir</a>
+        </li>
+    @else
+        <li>
+            <a href="{{ route('login.index') }}" class="blue-text text-darken-2">Login</a>
+        </li>
+        <li>
+            <a href="{{ route('register.index') }}"  class="blue-text text-darken-2">Registro</a>
+        </li>
+    @endif
     </ul>
 </nav>
     @yield('content')
