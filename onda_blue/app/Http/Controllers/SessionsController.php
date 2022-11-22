@@ -21,6 +21,7 @@ class SessionsController extends Controller
             ]);
         }
         return redirect()->to('/');
+        
     }
 
     public function destroy(){
