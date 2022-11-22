@@ -2,23 +2,6 @@
 @section('title' , 'Home')
 @section('content')
 
-                    
-                    @csrf
-                    
-                    <div class="mb-4 form-floating">
-                        
-                    </div>
-                    @error('message')
-                    <p class="red-text text-darken-2">{{ $message }}</p>
-                    @enderror
-                    <button type="submit" class="form-control-submit-button">Ingresar</button>
-                    </form>
-                </div> 
-            </div> 
-        </div> 
-    </div> 
- </div>
-
  <div class="wrapper fadeInDown">
     <div id="formContent">
         <div class="fadeIn first">

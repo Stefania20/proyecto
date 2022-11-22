@@ -6,11 +6,14 @@
   }
   
   a {
-    color: #92badd;
+    color: #56baed;
     display:inline-block;
     text-decoration: none;
     font-weight: 400;
+    border-radius: 3px;
+    border: 1px solid #56baed;
   }
+  
   
   h2 {
     text-align: center;
@@ -35,6 +38,15 @@
     min-height: 100%;
     padding: 20px;
   }
+
+  .caja1{
+    margin: 0;
+    margin-top: 20px;
+    padding: 30px;
+    width: 100%; 
+  }
+  
+
   
   #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
@@ -166,6 +178,10 @@
   
   input[type=password]:placeholder {
     color: #cccccc;
+  }
+  img{
+    width: 300px;
+    left: 300px;
   }
   
   

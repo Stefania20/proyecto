@@ -15,30 +15,28 @@
     
 </head>
 <body>
-<nav class="nav-wrapper teal lighten-2">
-    <div>
-        <p>OndaBlue</p>
-    </div>
+<nav class="navbar navbar-expand-lg bg-light">
+    <!-- Logo en la barra de navegacion -->
+    <div class="container-fluid">
+        
+        <img src="{{ url('img/Logo-ondablue.png') }}" alt="Logo" width="200" height="50" class="d-inline-block align-text-top">
+    
     <ul>
         @if(auth()->check())
-        <li>
-           <p class="blue-text text-darken-2">Bienvenid@ <b>{{  auth()->user()->name  }}</b></p>
-        </li>
-        <li>
-            <a href="{{ route('login.destroy') }}"  class="red-text text-darken-2">Salir</a>
-        </li>
+        
+           <p class="blue-text text-darken-2">Bienvenid@ <b>{{  auth()->user()->name  }}</b></p> 
+            <a href="{{ route('login.destroy') }}"  class="btn btn-outline-danger">Salir</a>
+    
     @else
-        <li>
-            <a href="{{ route('login.index') }}" class="blue-text text-darken-2">Login</a>
-        </li>
-        <li>
-            <a href="{{ route('register.index') }}"  class="blue-text text-darken-2">Registro</a>
-        </li>
+            <a href="{{ route('login.index') }}" class="btn btn-outline-primary">Login</a>
+            <a href="{{ route('register.index') }}"  class="btn btn-outline-primary">Registro</a>
     @endif
     </ul>
+</div>
 </nav>
     @yield('content')
 
     
 </body>
+
 </html>
