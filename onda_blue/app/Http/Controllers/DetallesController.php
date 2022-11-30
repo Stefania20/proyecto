@@ -6,6 +6,10 @@ use App\Models\Detalle;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDetalleRequest;
 
+use App\Models\Factura;
+use App\Models\Prenda;
+
+
 
 class DetallesController extends Controller
 {
@@ -16,9 +20,24 @@ class DetallesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view("detalle.detalles_index", ["detalles"=>Detalle::all()]);
+        //seleccionar facturas
+        $facturas = Factura::all();
+
+        //seleccionar prendas
+        $prendas = Prenda::all();
+
+        //var_dump($request->factura_id);
+        if (!$request->factura_id) {
+            return view("detalle.detalles_index")->with('facturas', $facturas)->with('prendas', $prendas);
+        } else {
+            $factura_id = $request->factura_id;
+            $factura = Factura::find($factura_id);
+            $detalles = $factura->detalle;
+            return view("detalle.detalles_index")->with('facturaD', $factura)->with('detalles', $detalles)->with('facturas', $facturas)->with('prendas', $prendas);
+        }
+       
     }
 
     /**
@@ -28,7 +47,12 @@ class DetallesController extends Controller
      */
     public function create()
     {
-        return view("detalle.detalles_create");
+         //seleccionar facturas
+         $facturas= Factura::all();
+
+         //seleccionar prendas
+         $prendas= Prenda::all();
+        return view("detalle.detalles_create")->with('facturas',$facturas)->with('prendas',$prendas);
     }
 
     /**
@@ -39,6 +63,7 @@ class DetallesController extends Controller
      */
     public function store(Request $request)
     {
+        $detalle = new Detalle($request->except("_token"));
         $detalle = new Detalle($request->input());
         $detalle->saveOrFail();
         return redirect()->route("detalles.index")->with(["mensaje" => "Detalle creado",
@@ -62,11 +87,10 @@ class DetallesController extends Controller
      * @param  \App\Models\Detalle  $detalle
      * @return \Illuminate\Http\Response
      */
-    public function edit(Detalle $detalle)
+    public function edit($id)
     {
-        return view("detalle.detalles_edit", ["detalle" => $detalle,]);
+        return view("detalle.detalles_edit", ["detalle" => Detalle::find($id), 'facturas' => Factura::all(), 'prendas' => Prenda::all()]);
     }
-
     /**
      * Update the specified resource in storage.
      *

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Factura;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreFacturaRequest;
+use App\Models\User;
+
 
 
 class FacturasController extends Controller
@@ -26,7 +28,11 @@ class FacturasController extends Controller
      */
     public function create()
     {
-        return view("factura.facturas_create");
+        //seleccionar usuarios
+        $users= User::all();
+
+        
+        return view("factura.facturas_create")->with('users',$users);
     }
 
     /**
@@ -37,6 +43,7 @@ class FacturasController extends Controller
      */
     public function store(Request $request)
     {
+        $factura = new Factura($request->except("_token"));
         $factura = new Factura($request->input());
         $factura->saveOrFail();
         return redirect()->route("facturas.index")->with(["mensaje" => "Factura creada",
@@ -60,9 +67,16 @@ class FacturasController extends Controller
      * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function edit(Factura $factura)
+    public function edit($id)
     {
-        return view("factura.facturas_edit", ["factura" => $factura,]);
+          //seleccionar usuarios
+         // $users= User::all();
+          //seleccionar prendas
+          //$pagos= Pago::all();
+          //$factura->pago->update(......)
+        $Factura = Factura::find($id);
+        $user = User::find($Factura->user_id);
+        return view("factura.facturas_edit", ["factura"=>$Factura,"user"=>$user]);
     }
 
     /**

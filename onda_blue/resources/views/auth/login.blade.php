@@ -6,7 +6,7 @@
     <div id="formContent">
         <div class="fadeIn first">
         <img src="{{ url('img/icono.png') }}" id="icon" alt="User Icon" />
-    </div>
+        </div>
         <form action="" method="POST">
             @csrf
             <h1>Iniciar Sesión</h1>
@@ -21,11 +21,13 @@
                         
                         
                     </div>
-                    @error('password')
-                    <p class="alert alert-danger">{{  $message }}</p>
+                    @error('message')
+                    <p class="alert alert-danger">{{ $message }}</p>
                     @enderror
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <button type="submit" class="fadeIn fourth">Ingresar</button>
         </form>            
     </div>
 </div>
+
+
 @endsection

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('factura_id')->constrained('facturas');
             $table->foreignId('prenda_id')->constrained('prendas');
+            $table->string('descripcion');
             $table->string('cantidad');
             $table->integer('precio');
         });

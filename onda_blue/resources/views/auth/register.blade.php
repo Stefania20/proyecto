@@ -14,6 +14,7 @@
                         <p>{{ $message }}</p>
                     </div>
                     @endif
+                    
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nombre Completo</label>
                         <input type="text" placeholder="Nombre" id="name" name="name" class="fadeIn second">
@@ -30,13 +31,12 @@
                     @enderror
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" placeholder="password" class="fadeIn second">
-                        
+                        <input type="password" class="form-control" placeholder="password" class="fadeIn second" id="password" name="password">
                     </div>
                     @error('password')
                     <p class="alert alert-danger">{{  $message }}</p>
                     @enderror
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <button type="submit" class="fadeIn fourth">Registrate</button>
         </form>            
     </div>
 </div>

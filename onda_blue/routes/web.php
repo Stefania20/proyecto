@@ -8,6 +8,11 @@ use App\Http\Controllers\PrendasController;
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UserController;
+
+
+use App\Models\Factura;
+use Illuminate\Http\Request;
 
 
 /*
@@ -37,13 +42,14 @@ Route::get('/facturas', function () {
     return view('facturas');
 });
 
+
 Route::get('/pagos', function () {
     return view('pagos');
 });
 
-Route::get('/prendas', function () {
+/*Route::get('/prendas', function () {
     return view('prendas');
-});
+});*/
 
 Route::get('/users', function () {
     return view('users');
@@ -62,9 +68,13 @@ Route::get('/login', [SessionsController::class, 'create'])->name('login.index')
 Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
 Route::get('/logout', [SessionsController::class, 'destroy'])->name('login.destroy');
 
+
 Route::resource("detalles", "DetallesController")->parameters(["detalles"=>"detalle"]);
 Route::resource("facturas", "FacturasController")->parameters(["facturas"=>"factura"]);
-Route::resource("pagos", "PagosController")->parameters(["pagos"=>"pago"]);
+Route::resource("users", "UserController")->parameters(["users"=>"user"]);
 Route::resource("prendas", "PrendasController")->parameters(["prendas"=>"prenda"]);
 Route::resource("homes", "RegisterController")->parameters(["homes"=>"home"]);
 
+Route::get('/user',[UserController::class, 'index'])
+->middleware('auth.user')
+->name('user.index');

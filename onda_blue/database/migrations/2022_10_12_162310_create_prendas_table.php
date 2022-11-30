@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('prendas', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
+            $table->string('nombre');
             $table->string('tipo_tela');
             $table->string('color');
         });

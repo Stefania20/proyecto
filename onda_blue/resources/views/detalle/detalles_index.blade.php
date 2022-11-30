@@ -1,40 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.nav')
+@section('title' , 'Home')
+@section('content')
+<section id=pantalla-dividida>
+    <div class="izquierda">
+        <div class="formulario ">
+            <div id="form">
+                <form action="{{ route ( 'detalles.store' ) }} " method="POST">
+                    @csrf
+                    <div id="jiji">
+                        <h1>Registrar Detalle</h1>
+                    </div>
+                    <div class="mb-3">
+                        <label class="label" for="factura_id">Factura</label>
+                        <br>
+                        <select class="grandecito" name="factura_id" id="factura_id">
+                            @foreach($facturas as $factura)
+                            <option value="{{ $factura->id }}">{{ $factura->id}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="label" for="prenda_id">Prenda</label>
+                        <br>
+                        <select class="grandecito" name="prenda_id" id="prenda_id">
+                            @foreach($prendas as $prenda)
+                            <option value="{{ $prenda->id }}">{{ $prenda->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-    <div class="row">
-        <div class="col-12">
-            <form method="POST" action="{{ route ( 'detalles.store' ) }} ">
-                @csrf
-                <div class="form-group">
-                    <label class="label">Cantidad</label>
-                    <input required autocomplete="off" name="cantidad" class="form-control"
-                           type="text" placeholder="cantidad">
-                    <label class="label">Precio</label>
-                    <input required autocomplete="off" name="precio" class="form-control"
-                           type="text" placeholder="precio">
-                    <label class="label">Id Factura</label>
-                    <input required autocomplete="off" name="factura_id" class="form-control"
-                           type="text" placeholder="factura">
-                    <label class="label">Id Prenda</label>
-                    <input required autocomplete="off" name="prenda_id" class="form-control"
-                           type="text" placeholder="prenda">
-                    
-                </div>
+                    <div class="mb-3">
+                        <label class="label" for="descripcion">Descripcion</label>
+                        <input name="descripcion" class="form-control" type="text" placeholder="Descripcion" id="descripcion" value="{{ old('descripcion') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="label" for="cantidad">Cantidad</label>
+                        <input name="cantidad" class="form-control" type="number" placeholder="cantidad" id="cantidad" value="{{ old('cantidad') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="label" for="precio">Precio</label>
+                        <br>
+                        <input id="precio" name="precio" class="form-control" type="number" placeholder="precio" value="{{old('precio')}}">
+                    </div>
 
-                
-                <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{ route ('detalles.index') }}" >Volver al listado</a>
-            </form>
+                    <button class="btn btn-success">Guardar</button>
+
+                </form>
+            </div>
         </div>
     </div>
+    <br>
+    <div class="derecha">
+        <form method="GET" action="{{ url('detalles') }}">
+            @csrf
+            Ingrese factura <input name="factura_id" />
+            <button type="submit">
+                buscar
+            </button>
+        </form>
+        @if(isset($facturaD))
+        <div class="hol">
+            Factura: {{ $facturaD->id }}
+        </div>
+        <br>
+        <table class='table'>
+            <tr>
+                <th>Prenda</th>
+                <th>Tipo tela</th>
+                <th>Color</th>
+                <th>Descripcion</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th></th>
+                <th></th>
 
-    
-</body>
-</html>
+            </tr>
+            @php
+            $total=0
+
+            @endphp
+            @if(isset($detalles))
+            @foreach($detalles as $detalle)
+            <tr>
+                <td>{{ $detalle->prendas->nombre }} </td>
+                <td>{{ $detalle->prendas->tipo_tela }}</td>
+                <td>{{ $detalle->prendas->color }}</td>
+                <td>{{ $detalle->descripcion}} </td>
+                <td>{{ $detalle->cantidad }} </td>
+                <td>{{ $detalle->precio }} </td>
+
+                <td>
+                    <a href="{{ route ( 'detalles.edit', $detalle->id ) }} ">
+                        <button class="btn btn-outline-warning" onclick="return confirm('¿Quieres Editar?')">Editar</button>
+                    </a>
+                </td>
+                <td>
+                    <form action="{{url('detalles/'.$detalle->id)}}" method="post">
+                        @csrf
+                        {{method_field('DELETE')}}
+                        <button class="btn btn-outline-danger" type="submit" onclick="return confirm('¿Quieres Eliminar?')" value="Eliminar"> Eliminar </button>
+                    </form>
+                </td>
+
+            </tr>
+            @php
+            $total=$total+($detalle->cantidad*$detalle->precio )
+            @endphp
+            @endforeach
+            @endif
+            <tr>
+                <th>Total: {{$total}} </th>
+            </tr>
+        </table>
+</section>
+
+@endif
+@endsection

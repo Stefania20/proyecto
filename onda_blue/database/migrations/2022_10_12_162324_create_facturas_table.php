@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pago_id')->constrained('pagos');
             $table->foreignId('user_id')->constrained('users');
             $table->string('fecha');
-            $table->boolean('estado');
+            $table->text('estado');
         });
     }
 

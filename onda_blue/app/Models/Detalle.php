@@ -12,9 +12,9 @@ class Detalle extends Model
         return $this-hasMany('App\Models\Factura');
     }
     public function prendas(){
-        return $this-hasMany('App\Models\Prenda');
+        return $this->belongsTo('App\Models\Prenda', 'prenda_id');
     }
 
-    protected $fillable = ['cantidad','precio','factura_id','prenda_id'];
+    protected $fillable = ['descripcion','cantidad','precio','factura_id','prenda_id'];
     
 }

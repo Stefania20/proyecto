@@ -10,4 +10,12 @@ class Prenda extends Model
     public function detalle (){
         return $this-belongsT('App\Models\Detalle');
     }
+
+    protected $fillable = [
+        'nombre',
+        'tipo_tela',
+        'color',
+    ];
+
+    public $timestamps=false;
 }

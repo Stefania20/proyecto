@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+
 
 
 class SessionsController extends Controller
@@ -19,8 +19,13 @@ class SessionsController extends Controller
             return back()->withErrors([
                 'message' => 'El correo y la contraseña son incorrectos, por favor intentalo de nuevo',
             ]);
+        }else{
+            if(auth()->user()->role == 'user'){
+                return redirect()->route('user.index');
+            } else{
+                return redirect()->to('/');
+            }
         }
-        return redirect()->to('/');
         
     }
 
