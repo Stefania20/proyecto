@@ -13,4 +13,9 @@ class UserController extends Controller
         
         return view("user.users_index");
     }
+
+    public function store(){
+        
+        return view("user.userf");
+    }
 }

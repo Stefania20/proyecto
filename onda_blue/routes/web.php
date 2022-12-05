@@ -78,3 +78,7 @@ Route::resource("homes", "RegisterController")->parameters(["homes"=>"home"]);
 Route::get('/user',[UserController::class, 'index'])
 ->middleware('auth.user')
 ->name('user.index');
+
+Route::get('/userf',[UserController::class, 'store'])
+->middleware('auth.user')
+->name('user.factura');

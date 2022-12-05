@@ -1,4 +1,10 @@
-<table class='table'>
+<hr>
+        @if(isset($facturaD))
+        <div class="hol">
+            Factura: {{ $facturaD->id }}
+        </div>
+        <br>
+        <table class='table'>
             <tr>
                 <th>Prenda</th>
                 <th>Tipo tela</th>
@@ -46,3 +52,10 @@
             <tr>
                 <th>Total: {{$total}} </th>
             </tr>
+            <div class="col-xl-12 text-right">
+                  <a href="{{ route('download-pdf') }}" class="btn btn-success btn-sm">PDF</a>
+              </div>
+        </table>
+
+
+@endif
