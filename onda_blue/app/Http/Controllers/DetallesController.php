@@ -8,6 +8,8 @@ use App\Http\Requests\StoreDetalleRequest;
 
 use App\Models\Factura;
 use App\Models\Prenda;
+use App\Models\User;
+
 
 
 
@@ -28,14 +30,18 @@ class DetallesController extends Controller
         //seleccionar prendas
         $prendas = Prenda::all();
 
+        // seleccionar usuarios
+        $users= User::all();
+        
+ 
         //var_dump($request->factura_id);
         if (!$request->factura_id) {
-            return view("detalle.detalles_index")->with('facturas', $facturas)->with('prendas', $prendas);
+            return view("detalle.detalles_index")->with('facturas', $facturas)->with('prendas', $prendas)->with('users',$users);
         } else {
             $factura_id = $request->factura_id;
             $factura = Factura::find($factura_id);
             $detalles = $factura->detalle;
-            return view("detalle.detalles_index")->with('facturaD', $factura)->with('detalles', $detalles)->with('facturas', $facturas)->with('prendas', $prendas);
+            return view("detalle.detalles_index")->with('facturaD', $factura)->with('detalles', $detalles)->with('facturas', $facturas)->with('prendas', $prendas)->with('users',$users);
         }
        
     }

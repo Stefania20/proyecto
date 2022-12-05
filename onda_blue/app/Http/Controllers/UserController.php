@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        return view("user.users_index", ["users"=>User::all()]);
+        
+        return view("user.users_index");
     }
 }

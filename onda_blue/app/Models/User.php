@@ -48,4 +48,8 @@ class User extends Authenticatable
         $this->attributes['password']= bcrypt($password);
     }
 
+    public function facturas (){
+        return $this->hasMany('App\Models\Factura','user_id');
+    }
+
 }

@@ -46,7 +46,7 @@ class FacturasController extends Controller
         $factura = new Factura($request->except("_token"));
         $factura = new Factura($request->input());
         $factura->saveOrFail();
-        return redirect()->route("facturas.index")->with(["mensaje" => "Factura creada",
+        return redirect()->route("detalles.index")->with(["mensaje" => "Factura creada",
         ]);
     }
 
