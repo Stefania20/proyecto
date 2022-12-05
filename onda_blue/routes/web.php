@@ -67,7 +67,7 @@ Route::get('/register', [RegisterController::class, 'create'])
 Route::get('/login', [SessionsController::class, 'create'])->name('login.index');
 Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
 Route::get('/logout', [SessionsController::class, 'destroy'])->name('login.destroy');
-
+Route::get('download-pdf', [DetallesController::class, 'downloadPdf'])->name('download-pdf');
 
 Route::resource("detalles", "DetallesController")->parameters(["detalles"=>"detalle"]);
 Route::resource("facturas", "FacturasController")->parameters(["facturas"=>"factura"]);

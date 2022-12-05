@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detalle;
+
+use PDF;
 use Illuminate\Http\Request;
+
 use App\Http\Requests\StoreDetalleRequest;
+
 
 use App\Models\Factura;
 use App\Models\Prenda;
@@ -121,5 +125,16 @@ class DetallesController extends Controller
         $detalle->delete();
         return redirect()->route("detalles.index")->with(["mensaje" => "Detalle eliminado",
         ]);
+    }
+
+    public function downloadPdf()
+    {
+        $detalles = Detalle::all();
+
+       view()->share('detalle.download',$detalles);
+
+        $pdf = PDF::loadView('detalle.download', ['detalles' => $detalles]);
+
+        return $pdf->download('Facturas');
     }
 }

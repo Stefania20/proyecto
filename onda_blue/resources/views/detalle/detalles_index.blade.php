@@ -150,6 +150,9 @@
             <tr>
                 <th>Total: {{$total}} </th>
             </tr>
+            <div class="col-xl-12 text-right">
+                  <a href="{{ route('download-pdf') }}" class="btn btn-success btn-sm">PDF</a>
+              </div>
         </table>
 
 
