@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Detalle;
 
+//use PDF;
+use Barryvdh\DomPDF\Facade;
 use PDF;
 use Illuminate\Http\Request;
 
@@ -129,12 +131,12 @@ class DetallesController extends Controller
 
     public function downloadPdf()
     {
-        $detalles = Detalle::all();
+        $detalle = Detalle::all();
 
-       view()->share('detalle.download',$detalles);
+       view()->share('detalle.download',$detalle);
 
-        $pdf = PDF::loadView('detalle.download', ['detalles' => $detalles]);
+        $pdf = PDF::loadView('detalle.download', ['detalle' => $detalle]);
 
-        return $pdf->download('Facturas');
+        return $pdf->download('Facturas.pdf');
     }
 }
