@@ -1,6 +1,7 @@
 @extends('layouts.nav')
 @section('title' , 'Home')
 @section('content')
+
     <div class="mask d-flex align-items-center h-100">
       <div class="container">
         <div class="row justify-content-center">
@@ -8,6 +9,7 @@
             <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
               <div class="card-body">
                 <div class="table-responsive">
+                <center><h1>Listado Facturas</h1></center>
                   <table class="table table-borderless mb-0">
                     <thead>
                       <tr>

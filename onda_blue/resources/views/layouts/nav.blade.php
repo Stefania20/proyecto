@@ -20,7 +20,7 @@
     <div class="container-fluid">
         
         <img src="{{ url('img/Logo-ondablue.png') }}" alt="Logo" width="200" height="50" class="d-inline-block align-text-top">
-        <a href="{{ route('facturas.create') }}"  class="btn btn-outline-primary">Factura</a>
+        <a href="{{ route('facturas.index') }}"  class="btn btn-outline-primary">Factura</a>
                 <a href="{{ route('detalles.index') }}"  class="btn btn-outline-primary">Detalle</a>
                 <a href="{{ route('prendas.create') }}"  class="btn btn-outline-primary">Prenda</a>
          <div class="btn-group">        
